@@ -37,12 +37,11 @@ public class Stock {
         Integer qty = rset.getInt("quantity");
         Integer fullstock = rset.getInt("full_stock");
 
-        int percentage = qty / fullstock;
+        Float percentage = qty.floatValue() / fullstock;
 
         if (percentage <= 0.2) {
             place_order();
         }
-
         rset.close();
         s.close();
         c.close();
@@ -105,6 +104,10 @@ public class Stock {
 
             OrderListname.add(n);
             OrderListqty.add(amount_to_order);
+            //for the moment the order list is just stored in these two arrays, one has the name of the product
+            //and the other array stores the number we need to order of each product
+            //I still need to add stuff to this function to send an email to the wholesaler
+            //and do the bank transfer while updating the profit database to retrieve the money from the order
 
         }
         update_whole_stock();
